@@ -11,13 +11,8 @@
 #
 ## Camera username and password
 # Specify host and name for each camera as follows.
-#cameraHostToName["192.168.1.101"]=frontwalk
-#cameraHostToName["192.168.1.105"]=pool
-#cameraHostToName["192.168.1.106"]=playground
-#cameraHostToName["192.168.1.107"]=poolequip
-#cameraHostToName["192.168.1.108"]=privatedrive
-#cameraHostToName["192.168.1.110"]=rearwalk
-#cameraHostToName["192.168.1.111"]=driveway
+#cameraHostToName["192.168.1.101"]=frontdoor
+#cameraHostToName["192.168.1.102"]=driveway
 #cameraRtspPort=554
 #caneraUsername=admin
 #cameraPassword=password
