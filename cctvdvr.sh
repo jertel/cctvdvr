@@ -4,21 +4,21 @@
 # to help get started quickly.
 #
 # -------------------------------------------------
-## Specify host and name for each camera as follows. To disable snapshotting 
-## set cameraSnapshotN variable to false
-#
-#camera1Host=192.168.1.101
-#camera1Name=driveway
-#camera1Snapshot=true
-#
-#camera2Host=192.168.1.105
-#camera2Name=sidewalk
-#camera2Snapshot=false
+
 #
 ## Storage directory where recordings and snapshots will be created.
 #mediaDir=/media
 #
 ## Camera username and password
+# Specify host and name for each camera as follows.
+#cameraHostToName["192.168.1.101"]=frontwalk
+#cameraHostToName["192.168.1.105"]=pool
+#cameraHostToName["192.168.1.106"]=playground
+#cameraHostToName["192.168.1.107"]=poolequip
+#cameraHostToName["192.168.1.108"]=privatedrive
+#cameraHostToName["192.168.1.110"]=rearwalk
+#cameraHostToName["192.168.1.111"]=driveway
+#cameraRtspPort=554
 #caneraUsername=admin
 #cameraPassword=password
 #
