@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>CCTVDVR</Name>
+  <Repository>jertel/cctvdvr</Repository>
+  <Registry>https://hub.docker.com/r/jertel/cctvdvr/</Registry>
+  <Network>host</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/jertel/cctvdvr/issues</Support>
+  <Overview>Simple CCTV DVR container, used for recording from CCTV cameras.</Overview>
+  <Category>HomeAutomation:</Category>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon/>
+  <ExtraParams/>
+  <DateInstalled>1496244152</DateInstalled>
+  <Description>Simple CCTV DVR container, used for recording from CCTV cameras.</Description>
+  <Networking>
+    <Mode>host</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/disks/cctv</HostDir>
+      <ContainerDir>/cctvdvr/media</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/cctvdvr/cctvdvr.conf</HostDir>
+      <ContainerDir>/cctvdvr/cctvdvr.conf</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/cctvdvr/.ssh</HostDir>
+      <ContainerDir>/cctvdvr/.ssh</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Config Name="Media" Target="/cctvdvr/media" Default="/mnt/disks/cctv" Mode="rw" Description="Directory to store the recorded CCTV camera videos. This is better suited for a separate drive, excluded from the parity-backed array, so that the constant writes do not degrade performance for other applications using the array." Type="Path" Display="always" Required="true" Mask="false">/mnt/disks/cctv</Config>
+  <Config Name="Configuration File" Target="/cctvdvr/cctvdvr.conf" Default="/mnt/users/appdata/cctvdvr/cctvdvr.conf" Mode="rw" Description="The configuration file containing the required parameters, such as the camera definitions, remote host information for snapshot backups, etc. See https://github.com/jertel/cctvdvr for more information." Type="Path" Display="always" Required="true" Mask="false">/mnt/users/appdata/cctvdvr/cctvdvr.conf</Config>
+  <Config Name="SSH Directory" Target="/cctvdvr/.ssh" Default="/mnt/user/appdata/cctvdvr/.ssh" Mode="rw" Description="The optional SSH directory containing the private key file id_rsa, public key file id_rsa.pub, and known_hosts file (with the remote host key already included). Not needed if the remoteHost parameter is not defined in the Configuration File." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/cctvdvr/.ssh</Config>
+</Container>
