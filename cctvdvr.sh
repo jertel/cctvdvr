@@ -81,7 +81,7 @@ function snapshot() {
   mkdir -p $tmpdir
   ffmpeg -v $verbosity \
     -rtsp_transport tcp \
-    -stimeout 5000000 \
+    -t 01:00:00 \
     -i "${rtsp}" \
     -metadata title="${camName}" \
     -vf fps=1/${snapshotIntervalSecs} -q:v ${snapshotQuality} \
@@ -116,13 +116,13 @@ function recordCamera() {
   rtsp="rtsp://${camHost}:${cameraRtspPort}/user=${cameraUsername}&password=${cameraPassword}&channel=0&stream=${recordStream}.sdp?real_stream--rtp-caching=100"
   mkdir -p $tmpdir
   echo "Beginning to record camera; host=${camHost}; name=${camName}; outputDir=${outputDir}"
+  start=`date +%Y%m%d%H%M`
   ffmpeg -v $verbosity \
     -rtsp_transport tcp \
-    -stimeout 5000000 \
+    -t 01:00:00 \
     -i "${rtsp}" \
     -metadata title="${camName}" \
-    -f segment -segment_time 3600 -segment_atclocktime 1 -segment_time_delta 3 \
-    -y -strftime 1 "${tmpdir}/${camName}_%Y%m%d_%H%M%S.avi" &
+    -y "${tmpdir}/${camName}_${start}.avi" &
 }
 
 function recordAll() {
