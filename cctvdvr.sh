@@ -14,7 +14,7 @@
 #cameraHostToName["192.168.1.101"]=frontdoor
 #cameraHostToName["192.168.1.102"]=driveway
 #cameraRtspPort=554
-#caneraUsername=admin
+#cameraUsername=admin
 #cameraPassword=password
 #
 ## Optional remote SCP location to store snapshots. Requires certificate-based 
@@ -32,8 +32,9 @@
 #recordStream=0
 #
 ## Snapshot JPG compression quality, higher number is worse, but smaller file size; 30 is fairly low quality but very small for low-bandwidth
+#snapshotEnabled=0
 #snapshotQuality=30
-#snapshotIntervalMillis=4000
+#snapshotIntervalSecs=4000
 #snapshotStream=1
 
 # Check input arguments
@@ -74,7 +75,7 @@ function snapshot() {
   camIndex=$3
   outputDir=$4
 
-  [[ "$(isSnapshotting $camHost)" == "1" ]] && return
+  [[ "${snapshotEnabled}" == "0" || "$(isSnapshotting $camHost)" == "1" ]] && return
   tmpdir="${outputDir}/snapshot"
   rtsp="rtsp://${camHost}:${cameraRtspPort}/user=${cameraUsername}&password=${cameraPassword}&channel=0&stream=${snapshotStream}.sdp?real_stream--rtp-caching=100"
   echo "Beginning to snapshot camera; host=${camHost}; name=${camName}; outputDir=${outputDir}"
