@@ -141,8 +141,14 @@ function recordAll() {
   done
 }
 
+counter=0
 while [ true ]; do
-  prune $mediaDir
+  let counter=counter+1
+  if [ $counter -eq 86400 ]; then
+    prune $mediaDir
+    counter=0
+  fi
   recordAll $mediaDir
   uploadSnapshots $mediaDir
+  sleep 1
 done
