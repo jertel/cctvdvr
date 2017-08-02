@@ -80,7 +80,7 @@ function snapshot() {
   rtsp="rtsp://${camHost}:${cameraRtspPort}/user=${cameraUsername}&password=${cameraPassword}&channel=0&stream=${snapshotStream}.sdp?real_stream--rtp-caching=100"
   echo "Beginning to snapshot camera; host=${camHost}; name=${camName}; outputDir=${outputDir}"
   mkdir -p $tmpdir
-  timeout -k 5s 3630s ffmpeg -v $verbosity \
+  timeout -t 3630 -s KILL ffmpeg -v $verbosity \
     -rtsp_transport tcp \
     -t 01:00:00 \
     -i "${rtsp}" \
@@ -118,7 +118,7 @@ function recordCamera() {
   mkdir -p $tmpdir
   echo "Beginning to record camera; host=${camHost}; name=${camName}; outputDir=${outputDir}"
   start=`date +%Y%m%d%H%M`
-  timeout -k 5s 3630s ffmpeg -v $verbosity \
+  timeout -t 3630 -s KILL ffmpeg -v $verbosity \
     -rtsp_transport tcp \
     -t 01:00:00 \
     -i "${rtsp}" \
