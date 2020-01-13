@@ -1,6 +1,6 @@
 #!/bin/bash
 # This CCTV DVR script requires an input configuration file specifying the required
-# parameters for useful operation. See the below commented sample configuration file 
+# parameters for useful operation. See the below commented sample configuration file
 # to help get started quickly.
 #
 # -------------------------------------------------
@@ -17,7 +17,7 @@
 #cameraUsername=admin
 #cameraPassword=password
 #
-## Optional remote SCP location to store snapshots. Requires certificate-based 
+## Optional remote SCP location to store snapshots. Requires certificate-based
 ## authentication.
 #remoteDir=/snapshots
 #remoteHost=
@@ -46,12 +46,12 @@ fi
 declare -A cameraHostToName
 source $configPath
 
-if [ -z "$mediaDir" ]; then 
+if [ -z "$mediaDir" ]; then
   echo "Media directory must be specified; check path to configuration file."
   exit 3
 fi
 
-if [ ! -d "$mediaDir" ]; then 
+if [ ! -d "$mediaDir" ]; then
   echo "Invalid media directory: $mediaDir"
   exit 2
 fi
@@ -84,6 +84,7 @@ function snapshot() {
     -rtsp_transport tcp \
     -t 01:00:00 \
     -i "${rtsp}" \
+    -filter_complex "drawtext=text='%{gmtime} UTC - ${camName}':fontsize=24:x=10:y=10:fontcolor=white:shadowx=2:shadowy=2" \
     -metadata title="${camName}" \
     -vf fps=1/${snapshotIntervalSecs} -q:v ${snapshotQuality} \
     -y -strftime 1 "${tmpdir}/${camIndex}_%Y%m%d_%H%M%S.jpg" &
@@ -122,6 +123,7 @@ function recordCamera() {
     -rtsp_transport tcp \
     -t 01:00:00 \
     -i "${rtsp}" \
+    -filter_complex "drawtext=text='%{gmtime} UTC - ${camName}':fontsize=24:x=10:y=10:fontcolor=white:shadowx=2:shadowy=2" \
     -metadata title="${camName}" \
     -y "${tmpdir}/${camName}_${start}.avi" &
 }
