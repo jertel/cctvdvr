@@ -124,6 +124,7 @@ function recordCamera() {
     -t 01:00:00 \
     -i "${rtsp}" \
     -filter_complex "drawtext=text='%{gmtime} UTC - ${camName}':fontsize=24:x=10:y=10:fontcolor=white:shadowx=2:shadowy=2" \
+    -an \
     -metadata title="${camName}" \
     -y "${tmpdir}/${camName}_${start}.avi" &
 }
